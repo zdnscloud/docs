@@ -1,0 +1,8 @@
+[book]
+authors = ["wss"]
+language = "zh"
+multilingual = false
+src = "v2.0"
+
+[output.html]
+theme = "theme"
