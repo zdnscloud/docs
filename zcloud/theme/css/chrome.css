@@ -312,11 +312,6 @@ ul#searchresults span.teaser em {
     background-color: var(--sidebar-bg);
     color: var(--sidebar-fg);
 }
-.sidebar-brand {
-  height: 80px;
-  background-image: url(/images/book-title.jpg);
-  background-repeat: no-repeat;
-}
 .sidebar-resizing {
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -329,10 +324,22 @@ ul#searchresults span.teaser em {
 .sidebar code {
     line-height: 2em;
 }
+.sidebar-brand {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.sidebar-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 20px;
+}
+.sidebar-book-title {
+}
 .sidebar .sidebar-scrollbox {
-    overflow-y: auto;
+    /* overflow-y: auto; */
     position: absolute;
-    top: 0;
+    top: 60px;
     bottom: 0;
     left: 0;
     right: 0;
