@@ -335,6 +335,7 @@ ul#searchresults span.teaser em {
   margin: 0 20px;
 }
 .sidebar-book-title {
+  font-size: 16px;
 }
 .sidebar .sidebar-scrollbox {
     /* overflow-y: auto; */
