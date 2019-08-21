@@ -270,7 +270,7 @@ SSH设置：用户名，ssh私钥文件，ssh连接端口。
 
 **描述**
 
-创建集群时，集群状态初始为creating，若创建成功（zcloud可正常访问api server），则集群状态变为running。若失败，集群状态为unavailable。
+创建集群时，集群状态初始为creating，若创建成功（zcloud可正常访问api server），则集群状态变为running。只有running状态下，才可以选择集群，进行其它操作。若失败，集群状态为unavailable。
 
 #### **5.2.4.3**      删除集群
 

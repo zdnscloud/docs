@@ -160,7 +160,9 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub username@IP2
 ssh-copy-id -i ~/.ssh/id_rsa.pub username@IP3
 ```
 
-保存好~/.ssh/id_rsa，创建集群的时候需要用到。
+保存好~/.ssh/id_rsa，创建集群的时候需要用到。为防止错误发生，最好整个文件整体下载保存，不要复制粘贴内容进行保存，更不要新建txt等任何文本格式的文件进行保存。
+
+**注意：Zcloud控制节点不能使用集群内部的服务器，切记！**
 
 ## Docker安装与配置
 
