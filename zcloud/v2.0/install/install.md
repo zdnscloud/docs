@@ -454,3 +454,15 @@ sudo update-grub;
   注意：-dns参数为Global DNS的地址和端口，IP地址请填写Global DNS的网卡接口地址。
 
   至此，Zcloud部署完成。
+  
+* 配置存储
+
+  Kubernetes集群的使用中，存储是必须的。
+
+docker run --rm  --privileged=true -v /dev/:/dev/ -e OSD_DEVICE=/dev/sdb ceph/daemon:latest-mimic zap_device
+
+* 安装监控
+
+* 安装镜像仓库
+
+  
