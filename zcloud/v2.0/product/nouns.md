@@ -1,28 +1,35 @@
+## 名词解释
+
 了解和使用 Zcloud管理平台，会涉及到以下的基本概念：
 
 * 命名空间
 
-  Namespace， 为 Kubernetes 集群提供虚拟的隔离作用，详见 [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)。
+  Namespace，相同物理集群支持的多个虚拟集群。这些虚拟集群称为命名空间。
+
+* Pod
+
+  Pod是可以在Kubernetes中创建和管理的最小的可部署计算单元。
 
 * 无状态副本
 
-  Deployments，表示用户对 Kubernetes 集群的一次更新操作，详见 [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)。
+  Deployments，无状态副本控制器为Pods和副本集提供声明性更新。
+  您将描述无状态副本中所需的属性，无状态副本控制器将以受控的速度将实际状态更改为所需状态。您可以定义无状态副本来创建新的副本集，或者删除现有的无状态副本，并使用新无状态副本的所有资源。删除无状态副本将清理它创建的pod。
 
 * 有状态副本
 
-  StatefulSets，用来管理有状态应用，可以保证部署和 scale 的顺序，详见 [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)。
+  StatefulSets，是用于管理有状态应用程序的工作负载API对象。删除有状态副本将清理它创建的pod。
 
 * 守护进程集
 
-  DaemonSets，保证在每个 Node 上都运行一个容器副本，常用来部署一些集群的日志、监控或者其他系统管理应用，详见 [Daemonset](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)。
+  DaemonSets，守护进程集确保所有(或部分)节点运行Pod的副本。当节点被添加到集群中时，pod也被添加到集群中。当节点从集群中移除时，这些pod将被垃圾收集。删除守护进程集将清理它创建的pod。
 
 * 任务
 
-  Jobs，在 Kubernetes 中用来控制批处理型任务的资源对象，即仅执行一次的任务，它保证批处理任务的一个或多个 Pod 成功结束。任务管理的 Pod 根据用户的设置将任务成功完成就自动退出了。比如在创建工作负载前，执行任务，将镜像上传至镜像仓库。详见 [Job](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。
+  Jobs，任务创建一个或多个pod，并确保指定数量的pod成功终止。当pods成功完成时，任务将跟踪成功完成的情况。当达到指定数量的成功完成时，任务就完成了。删除任务将清理它创建的pod。。
 
 * 定时任务
 
-  CronJob，是基于时间的 Job，就类似于 Linux 系统的 crontab，在指定的时间周期运行指定的 Job，在给定时间点只运行一次或周期性地运行。详见 [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)。
+  CronJob，定时任务按照基于时间的时间表创建任务。一个定时任务对象就像crontab (cron表)文件的一行。它按照给定的时间表定期运行任务，以Cron格式编写。
 
 * 配置字典
 
@@ -30,34 +37,34 @@
 
 * 保密字典
 
-  Secret，是用来保存小片敏感数据的k8s资源，例如密码，token，或者秘钥。
+  Secret，保密字典允许存储和管理敏感信息，比如密码、令牌和ssh密钥。将此信息放入保密字典中比将其逐字地放入Pod定义或容器映像中更安全、更灵活。
 
 * 服务
 
-  Service， 一个 Kubernete 服务是一个最小的对象，类似 Pod，和其它的终端对象一样，详见 [Service](https://kubernetes.io/docs/concepts/services-networking/service/)。
+  Service，将运行在一组pod上的应用程序公开为网络服务的抽象方法。使用Kubernetes，您不需要修改应用程序来使用不熟悉的服务发现机制。Kubernetes为pod提供了它们自己的IP地址和一组pod的一个DNS名称，并且可以在它们之间实现负载平衡。
 
 * 服务入口
 
-  Ingress，是授权入站连接到达集群服务的规则集合。可通过 Ingress 配置提供外部可访问的 URL、负载均衡、SSL、基于名称的虚拟主机等，详见 [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)。
+  Ingress，是授权入站连接到达集群服务的规则集合。可通过 Ingress 配置提供外部可访问的 URL、负载均衡、SSL、基于名称的虚拟主机。
 
 * 服务入口UDP
 
-  支持UDP的外部访问。
+  支持UDP的服务入口外部访问。
 
 * 镜像仓库
 
-  Image Registries，镜像仓库用于存放 Docker 镜像，Docker 镜像用于部署容器服务， 详见 [Images](https://kubernetes.io/docs/concepts/containers/images/)。
+  Image Registries，镜像仓库用于存放 Docker 镜像，Docker 镜像用于部署容器服务，创建Docker映像并将其推入镜像仓库，然后在Kubernetes pod中引用它。
 
 * 存储卷
 
-  PersistentVolumeClaim（PVC），满足用户对于持久化存储的需求，用户将 Pod 内需要持久化的数据挂载至存储卷，实现删除 Pod 后，数据仍保留在存储卷内。Kubesphere 推荐使用动态分配存储，当集群管理员配置存储类型后，集群用户可一键式分配和回收存储卷，无需关心存储底层细节。详见 [Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims)。
+  PersistentVolumeClaim（PVC），满足用户对于持久化存储的需求，用户将 Pod 内需要持久化的数据挂载至存储卷，只要POD不被删除，数据就保留在存储卷内。
 
 * 存储类型
 
-  StorageClass，为管理员提供了描述存储 “Class（类）” 的方法，包含 Provisioner、 ReclaimPolicy 和 Parameters 。详见 [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/)。
+  StorageClass，为管理员提供了区分存储类型的方法，比如lvm的本地存储，ceph的网络存储等。
 
 * 节点
 
-  Node，Kubernetes 集群中的计算能力由 Node 提供，Kubernetes 集群中的 Node 是所有 Pod 运行所在的工作主机，可以是物理机也可以是虚拟机。详见 [Nodes](https://kubernetes.io/docs/concepts/architecture/nodes/)。
+  Node，节点是Kubernetes中的工作服务器。根据集群的不同，节点可以是VM或物理机器。每个节点都包含运行pods所需的服务，并由主组件管理。节点上的服务包括容器运行时、kubelet和kube-proxy。
 
   

@@ -1,10 +1,21 @@
 ## 基础环境配置
 
-* 主机配置
-
 1、配置要求
 
+您的主机可以是：
 
+- 云主机
+- 本地虚拟机
+- 本地物理机
+
+**注意**:在使用云主机时，您需要允许TCP/80和TCP/443入站通信端口。
+
+**硬件需求**：
+
+- CPU: 2C
+- 内存: 4GB
+
+**注意**:此配置仅为满足小规模测试环境的最低配置。
 
 2、主机名配置
 
@@ -124,14 +135,13 @@ EOF
 Zcloud在以下操作系统及其后续的非主要发行版上受支持:
 
 - Ubuntu 16.04.x (64-bit)
-- - Docker 17.03.x, 18.06.x,       18.09.x
+  - Docker 17.03.x, 18.06.x,       18.09.x
 - Ubuntu 18.04.x (64-bit)
-- - Docker 18.06.x, 18.09.x
+  - Docker 18.06.x, 18.09.x
 - Red Hat Enterprise Linux      (RHEL)/CentOS 7.4+ (64-bit)
-- - RHEL Docker 1.13
   - Docker 17.03.x, 18.06.x,       18.09.x
 - Windows Server version 1803      (64-bit)
-- - Docker 17.06
+  - Docker 17.06
 
 Ubuntu、Centos操作系统有Desktop和Server版本，选择请安装server版本.
 
@@ -380,67 +390,7 @@ sudo update-grub;
 建议在ETCD集群中使用奇数个成员,通过添加额外成员可以获得更高的失败容错。具体详情可以查阅[optimal-cluster-size](https://coreos.com/etcd/docs/latest/v2/admin_guide.html#optimal-cluster-size)。
 
 ## 部署Zcloud
-
-* 部署Global DNS Server
-
-  新建/data/vanguard/vanguard.conf文件，配置内容如下：
-
-  ```
-  server:
-      addr: 
-      - 0.0.0.0:53
-      http_cmd_addr: 0.0.0.0:8080
-      handler_count: 512
-      enable_tcp: false
-  
-  enable_modules:
-      - query_log
-      - view
-      - cache
-      - auth
-      - forwarder
-  
-  logger:
-      query_log: 
-          size_in_byte: 5000000000
-          number_of_files: 5
-          qlog_extension: true
-  
-      general_log:
-          enable: false
-          size_in_byte: 5000000000
-          number_of_files: 5
-          level: info
-  
-  cache: 
-      short_answer: false 
-      prefetch: false
-  
-  
-  forwarder:
-      forward_zone_for_view:
-      - view: "default"
-        zones:
-        - name: "."
-          forward_style: "rtt"
-          forwarders:
-          - 114.114.114.114:53
-          - 8.8.8.8:53
-  ```
-
-  启动Global DNS
-
-  ```
-  docker rm -f vanguard 
-  docker run --restart=always  -d -p 53:53/udp -p 8880:8080 --name vanguard \
-          -v /data/vanguard:/etc/vanguard \
-          zdnscloud/vanguard:v0.1 
-  elif [ $1 == "s" ];then
-      
-  ```
-
 * 部署Zcloud
-
   创建/data/zcloud目录，执行下面的命令：
 
   ```
@@ -448,21 +398,113 @@ sudo update-grub;
   docker run --restart=always  -d -p 80:80 --name zcloud \
           -v /data/zcloud:/etc/db \
           zdnscloud/zcloud:master \
-          -dns 192.168.40.129:8880 -db /etc/db 
+          -db /etc/db 
   ```
 
-  注意：-dns参数为Global DNS的地址和端口，IP地址请填写Global DNS的网卡接口地址。
-
-  至此，Zcloud部署完成。
+  注意：-db /etc/db参数为zcloud的k-v数据库存储目录。至此，Zcloud部署完成。
   
-* 配置存储
 
-  Kubernetes集群的使用中，存储是必须的。
+## 登录Zcloud
 
-docker run --rm  --privileged=true -v /dev/:/dev/ -e OSD_DEVICE=/dev/sdb ceph/daemon:latest-mimic zap_device
+登录并开始使用Zcloud。在地址栏输入http://<IP>/login，用户名admin，密码默认为zcloud。
 
-* 安装监控
+![img](login.png)
 
-* 安装镜像仓库
 
-  
+
+## 创建K8S集群
+
+根据“节点需求”与“Docker安装与配置”完成3台集群节点服务器的准备。集群规划为1个控制节点，控制节点同时安装ETCD，两个worker节点，worker节点同时做为边界节点的角色，worker节点除系统盘外，还需要带有一块数据盘。数据盘做为k8s集群的存储使用。
+
+**注意：**必须设置好免密登录，保存好保存好~/.ssh/id_rsa。
+
+step1. 登录Zcloud成功后，点击下图中红框示意的新建集群按钮。
+
+![img](create-cluster1.png)
+
+step2. 根据实现的集群节点信息，按下图中的格式进行添写。SSH私钥处上传~/.ssh/id_rsa。其中的IP与SSH用户名信息等，按实际环境填写。
+
+![img](create-cluster2.png)
+
+点击保存后，页面会跳转到全局的集群列表页面，可以看到当前集群的状态。如下图：
+
+![img](create-cluster3.png)
+
+当集群创建成功后，状态更新如下图中所示：
+
+![img](create-cluster4.png)
+
+- ETCD集群容错表
+
+建议在ETCD集群中使用奇数个成员,通过添加额外成员可以获得更高的失败容错。具体详情可以查阅[optimal-cluster-size](https://coreos.com/etcd/docs/latest/v2/admin_guide.html#optimal-cluster-size)。
+
+| **集群大小** | **MAJORITY** | **失败容错** |
+| ------------ | ------------ | ------------ |
+| 1            | 1            | 0            |
+| 2            | 2            | 0            |
+| 3            | 2            | **1**        |
+| 4            | 3            | 1            |
+| 5            | 3            | **2**        |
+| 6            | 4            | 2            |
+| 7            | 4            | **3**        |
+| 8            | 5            | 3            |
+| 9            | 5            | **4**        |
+
+## 配置集群存储
+
+SSH登录worker1节点，查看数据盘的路径。
+
+```#fdisk -l```
+
+此时看到，数据盘的路径为/dev/sdb，执行以下命令对数据盘做初始化操作。
+
+```docker run --rm  --privileged=true -v /dev/:/dev/ -e OSD_DEVICE=/dev/sdb ceph/daemon:latest-mimic zap_device```
+
+看到如下输出代表数据盘初始化成功。
+
+```
+[root@localhost ~]# docker run --rm  --privileged=true -v /dev/:/dev/ -e OSD_DEVICE=/dev/sdb ceph/daemon:latest-mimic zap_device
+2019-08-24 09:05:40  /opt/ceph-container/bin/entrypoint.sh: Zapping the entire device /dev/sdb
+Creating new GPT entries.
+GPT data structures destroyed! You may now partition the disk using fdisk or
+other utilities.
+The operation has completed successfully.
+10+0 records in
+10+0 records out
+10485760 bytes (10 MB) copied, 0.0111043 s, 944 MB/s
+2019-08-24 09:05:43  /opt/ceph-container/bin/entrypoint.sh: Executing partprobe on /dev/sdb
+```
+
+登录worker2节点执行相同的数据盘初始化操作。
+
+在集群列表页，点击集群名称，进入集群。如下图红框所示：
+
+![img](entry-cluster.png)
+
+如图所示，点击集群管理菜单中的存储菜单：
+
+![img](entry-storage.png)
+
+点击存储新建按钮，如图所示：
+
+![img](create-storage.png)
+
+按照下图所示，创建lvm本地存储：
+
+存储创建成功如图所示：
+
+### 安装监控
+
+点击监控中心菜单，在集群监控内容区域中点击打开，即可进行本集群监控的安装。安装成功后可以点击”打开监控中心“跳转到监控管理页面。如图所示：
+
+![img](monitor.png)
+
+### 安装镜像仓库
+
+点击镜像仓库菜单，在镜像仓库内容区域中点击打开，即可进行镜像仓库的安装。安装成功后可以点击”打开镜像仓库“按钮跳转到镜像仓库的管理页面。如图所示：
+
+![img](registry.png)
+
+这里需要说明的是，镜像仓库不需要每个集群都进行安装，只安装一个，对所有用户提供服务即可。
+
+至此，使用Zcloud安装一个集群的基础环境已经安装完毕，请参照”快速入门“一节，开始你的Zcloud部署应用之旅吧。
