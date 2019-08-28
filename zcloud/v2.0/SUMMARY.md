@@ -5,7 +5,6 @@
 * [产品介绍](README.md)
     * [产品简介](product/introduction.md)
     * [产品功能](product/functions.md)
-    * [产品特点](product/features.md)
     * [应用场景](product/scenarios.md)
     * [名词解释](product/nouns.md)
 * [安装指南](install/readme.md)
