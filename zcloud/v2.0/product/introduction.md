@@ -10,7 +10,7 @@ Zcloud是企业级容器云的完整解决方案。Zcloud可以帮助企业在�
 
 下图说明了Zcloud的技术架构。该图描绘了管理一个kubernetes集群的Zcloud。
 
-![img](D:/myjobs/myjob_zcloud/docs/zcloud/v2.0/product/architecture_back.jpg)
+![img](architecture_back.jpg)
 每个Zcloud组件的功能如下:
 **Zcloud**
 Zcloud server运行在独立的服务器上，它实现了以下功能:

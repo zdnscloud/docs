@@ -406,7 +406,7 @@ sudo update-grub;
 
 ## 登录Zcloud
 
-登录并开始使用Zcloud。在地址栏输入http://<IP>/login，用户名admin，密码默认为zcloud。
+登录并开始使用Zcloud。在地址栏输入http://IP/login，用户名admin，密码默认为zcloud。
 
 ![img](login.png)
 
