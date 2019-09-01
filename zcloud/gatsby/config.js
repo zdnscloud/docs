@@ -7,7 +7,7 @@ const config = {
 	"header": {
 		"logo": "/logo.jpg",
 		"logoLink": "https://zc.zdns.cn",
-		"title": "ZCloud 文档中心",
+		"title": "Zcloud 文档中心",
 		"githubUrl": "https://github.com/zdnscloud/docs",
 		"helpUrl": "",
 		"tweetText": "",
@@ -39,7 +39,7 @@ const config = {
 		"ignoreIndex": false,
 	},
 	"siteMetadata": {
-		"title": "ZCloud 文档中心",
+		"title": "Zcloud 文档中心",
 		"description": "Documentation built with mdx. Powering zc.zdns.cn ",
 		"ogImage": null,
 		"docsLocation": "https://github.com/zdnscloud/docs/tree/master/content",
