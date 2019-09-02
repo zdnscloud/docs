@@ -3,6 +3,7 @@ title: "快速入门"
 metaTitle: "快速入门"
 metaDescription: "快速入门"
 ---
+
 ## 快速入门
 
 本教程将指导您完成:
@@ -17,15 +18,15 @@ metaDescription: "快速入门"
 
 1、选择集群
 
-![img](./cquickstart/entry-cluster.png)
+![img](./quickstart/entry-cluster.png)
 
 2、选择左侧菜单基础资源中的有状态副本
 
-![img](./cquickstart/entry-statefulset.png)
+![img](./quickstart/entry-statefulset.png)
 
 3、创建有状态副本
 
-![img](./cquickstart/create-statefulset.png)
+![img](./quickstart/create-statefulset.png)
 
 创建页面按如下内容进行填写
 
@@ -67,7 +68,7 @@ metaDescription: "快速入门"
 
 单击保存，如图所示：
 
-![img](./cquickstart/mysql-save.png)
+![img](./quickstart/mysql-save.png)
 
 4、部署mysql svc
 
@@ -75,16 +76,16 @@ metaDescription: "快速入门"
 
 单击内部端口打开按钮，保存即可。在弹出的提示框中选择取消。
 
-![img](./cquickstart/mysql-svc-save.png)
+![img](./quickstart/mysql-svc-save.png)
 
 ## 部署wordpress
 1、选择左侧菜单基础资源中的有状态副本
 
-![img](./cquickstart/entry-deployment.png)
+![img](./quickstart/entry-deployment.png)
 
 2、创建无状态副本
 
-![img](./cquickstart/create-deployment.png)
+![img](./quickstart/create-deployment.png)
 
 创建页面按如下内容进行填写
 
@@ -130,7 +131,7 @@ metaDescription: "快速入门"
 
 单击保存，如图所示：
 
-![img](./cquickstart/wordpress-save.png)
+![img](./quickstart/wordpress-save.png)
 
 3、部署wordpress svc
 
@@ -138,24 +139,24 @@ metaDescription: "快速入门"
 
 服务类型选择Node Port，单击内部端口打开按钮，端口列表填写8888，保存即可。在弹出的提示框中选择取消。
 
-![img](./cquickstart/wordpress-svc-save.png)
+![img](./quickstart/wordpress-svc-save.png)
 
 ## 访问wordpress
 
-浏览器地址栏输入：http://work节点IP:nodeport，如下图所示：
+浏览器地址栏输入：http://<work节点IP>:<nodeport>，如下图所示：
 
-![img](./cquickstart/wordpress1.png)
+![img](./quickstart/wordpress1.png)
 
 开启你的wordpress之旅吧！
 
-![img](./cquickstart/wordpress2.png)
+![img](./quickstart/wordpress2.png)
 
-![img](./cquickstart/wordpress3.png)
+![img](./quickstart/wordpress3.png)
 
-![img](./cquickstart/wordpress4.png)
+![img](./quickstart/wordpress4.png)
 
-![img](./cquickstart/wordpress5.png)
+![img](./quickstart/wordpress5.png)
 
-![img](./cquickstart/wordpress6.png)
+![img](./quickstart/wordpress6.png)
 
-![img](./cquickstart/wordpress7.png)
+![img](./quickstart/wordpress7.png)

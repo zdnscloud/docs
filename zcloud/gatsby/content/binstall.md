@@ -3,6 +3,7 @@ title: "安装说明"
 metaTitle: "安装说明"
 metaDescription: "安装说明"
 ---
+
 ## 基础环境配置
 
 1、配置要求
@@ -389,10 +390,6 @@ sudo update-grub;
 ```
 
 **注意**通过以上命令可自动配置参数，如果`/etc/default/grub`非默认配置，需根据实际参数做调整。**提示**以上配置完成后，建议重启一次主机。
-
-
-
-建议在ETCD集群中使用奇数个成员,通过添加额外成员可以获得更高的失败容错。具体详情可以查阅[optimal-cluster-size](https://coreos.com/etcd/docs/latest/v2/admin_guide.html#optimal-cluster-size)。
 
 ## 部署Zcloud
 * 部署Zcloud
