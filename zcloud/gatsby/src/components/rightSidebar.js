@@ -6,8 +6,6 @@ import Link from "./link";
 import './styles.css';
 import config from '../../config';
 
-const forcedNavOrder = config.sidebar.forcedNavOrder;
-
 const Sidebar = styled('aside')`
   width: 100%;
   background-color: #fff;

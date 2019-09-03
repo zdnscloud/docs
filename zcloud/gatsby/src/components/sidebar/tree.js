@@ -33,36 +33,57 @@ const calculateTreeData = edges => {
     }
     return accu;
   }, {items: []});
-  const {sidebar: {forcedNavOrder = []}} = config;
-  const tmp = [...forcedNavOrder];
+  const {sidebar: {navOrder = []}} = config;
+  const tmp = [...navOrder];
   tmp.reverse();
   return tmp.reduce((accu, slug) => {
-    const parts = slug.split('/');
+    let name = slug;
+    let children = [];
+    if (Array.isArray(slug)) {
+      name = slug[0];
+      children = slug.slice(1);
+    }
     let {items: prevItems} = accu;
-    for (const part of parts.slice(1, -1)) {
-      let tmp = prevItems.find(({label}) => label == part);
+
+    {
+      let tmp = prevItems.find(({label}) => label == name);
       if (tmp) {
         if (!tmp.items) {
           tmp.items = [];
         }
       } else {
-        tmp = {label: part, items: []};
+        tmp = {label: name, items: []};
         prevItems.push(tmp)
       }
-      prevItems = tmp.items;
+      // prevItems = tmp.items;
     }
     // sort items alphabetically.
     prevItems.map((item) => {
-      item.items = item.items
-        .sort(function (a, b) {
-          if (a.label < b.label)
-            return -1;
-          if (a.label > b.label)
-            return 1;
-          return 0;
-        });
+      if (item.label == name) {
+        item.items = item.items
+          .sort(function (a, b) {
+            if (children.length > 0) {
+              const idx = (l) => children.indexOf(l);
+              if (idx(a.label) > idx(b.label)) {
+                return 1;
+              }
+              if (idx(a.label) < idx(b.label)) {
+                return -1;
+              }
+              return 0;
+            } else {
+              if (a.label < b.label)
+                return -1;
+              if (a.label > b.label)
+                return 1;
+              return 0;
+            }
+          });
+      }
     })
-    const index = prevItems.findIndex(({label}) => label === parts[parts.length - 1]);
+
+
+    const index = prevItems.findIndex(({label}) => label === name);
     accu.items.unshift(prevItems.splice(index, 1)[0]);
     return accu;
   }, tree);
@@ -85,6 +106,7 @@ const Tree = ({edges}) => {
       className={`${config.sidebar.frontLine ? 'showFrontLine' : 'hideFrontLine'} firstLevel`}
       setCollapsed={toggle}
       collapsed={collapsed}
+      level={0}
       {...treeData}
     />
   );

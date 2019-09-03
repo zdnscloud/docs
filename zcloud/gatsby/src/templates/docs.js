@@ -8,7 +8,7 @@ import NextPrevious from '../components/NextPrevious';
 import '../components/styles.css';
 import config from '../../config';
 
-const forcedNavOrder = config.sidebar.forcedNavOrder;
+const navOrder = config.sidebar.navOrder;
 
 injectGlobal`
   * {
@@ -86,13 +86,13 @@ export default class MDXRuntimeTest extends Component {
       .sort()
       .reduce(
         (acc, cur) => {
-          if (forcedNavOrder.find(url => url === cur)) {
+          if (navOrder.find(url => url === cur)) {
             return { ...acc, [cur]: [cur] };
           }
 
           const prefix = cur.split("/")[1];
 
-          if (prefix && forcedNavOrder.find(url => url === `/${prefix}`)) {
+          if (prefix && navOrder.find(url => url === `/${prefix}`)) {
             return { ...acc, [`/${prefix}`]: [...acc[`/${prefix}`], cur] };
           } else {
             return { ...acc, items: [...acc.items, cur] };
@@ -101,7 +101,7 @@ export default class MDXRuntimeTest extends Component {
         { items: [] }
       );
 
-    const nav = forcedNavOrder
+    const nav = navOrder
       .reduce((acc, cur) => {
         return acc.concat(navItems[cur]);
       }, [])

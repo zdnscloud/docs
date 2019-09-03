@@ -7,8 +7,6 @@ import '../styles.css';
 import config from '../../../config';
 import Header from './header';
 
-const forcedNavOrder = config.sidebar.forcedNavOrder;
-
 // eslint-disable-next-line no-unused-vars
 const ListItem = styled(({ className, active, level, ...props }) => {
     return (

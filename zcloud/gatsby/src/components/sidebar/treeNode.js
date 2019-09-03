@@ -4,7 +4,7 @@ import ClosedSvg from '../images/closed';
 import config from '../../../config';
 import Link from "../link";
 
-const TreeNode = ({className = '', setCollapsed, collapsed, url, title, items, ...rest}) => {
+const TreeNode = ({className = '', setCollapsed, collapsed, url, title, items, level, ...rest}) => {
   const isCollapsed = collapsed[url];
   const collapse = () => {
     setCollapsed(url);
@@ -14,6 +14,7 @@ const TreeNode = ({className = '', setCollapsed, collapsed, url, title, items, .
   const pathname = location.pathname.replace(/\/$/, '');
   const active = pathname === url || pathname === (config.gatsby.pathPrefix + url);
   const calculatedClassName = `${className} item ${active ? 'active' : ''}`;
+  const childrenLevel = level + 1;
   return (
     <li
       className={calculatedClassName}
@@ -26,21 +27,24 @@ const TreeNode = ({className = '', setCollapsed, collapsed, url, title, items, .
         </button>
       ) : null}
 
-      {title && (
+      {title && !hasChildren ? (
         <Link
           to={url}
         >
           {title}
-        </Link>)
-      }
+        </Link>
+      ) : (
+        <a onClick={collapse}>{title}</a>
+      )}
 
       {!isCollapsed && hasChildren ? (
-        <ul>
-          {items.map((item) => (
+        <ul data-level={childrenLevel}>
+          {items.map((item, idx) => (
             <TreeNode
-              key={item.url}
+              key={item.url || idx}
               setCollapsed={setCollapsed}
               collapsed={collapsed}
+              level={childrenLevel}
               {...item}
             />
           ))}

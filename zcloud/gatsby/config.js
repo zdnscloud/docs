@@ -23,20 +23,20 @@ const config = {
 		}
 	},
 	"sidebar": {
-		"forcedNavOrder": [
-      "/product",
-      "/install",
-      "/quickstart",
-      "/companion",
-      "/companion2",
-      "/api",
-      "/question",
-      "/release",
-		],
+    navOrder: [
+      'binstall',
+      [
+        'aproduct',
+        'cnouns',
+        'aintroduction',
+        'bfunctions',
+      ],
+      'cquickstart'
+    ],
 		"links": [
 		],
 		"frontline": true,
-		"ignoreIndex": false,
+		"ignoreIndex": true,
 	},
 	"siteMetadata": {
 		"title": "Zcloud 文档中心",
