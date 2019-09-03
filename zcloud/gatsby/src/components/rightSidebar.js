@@ -1,6 +1,7 @@
 import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 import styled from "react-emotion";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Link from "./link";
 import './styles.css';
 import config from '../../config';
@@ -29,7 +30,7 @@ const Sidebar = styled('aside')`
 const ListItem = styled(({ className, active, level, ...props }) => {
     return (
       <li className={className}>
-        <a href={props.to} {...props} />
+        <AnchorLink href={props.to} {...props} />
       </li>
     );
 })`
