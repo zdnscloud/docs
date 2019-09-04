@@ -24,14 +24,21 @@ const config = {
 	},
 	"sidebar": {
     navOrder: [
-      'binstall',
       [
-        'aproduct',
-        'cnouns',
-        'aintroduction',
-        'bfunctions',
+        'product',
+        'introduction',
+        'nouns',
+        'functions',
+        'scenarios',
       ],
-      'cquickstart'
+      [
+        'install',
+        'install',
+      ],
+      [
+        'quickstart',
+        'quickstart',
+      ]
     ],
 		"links": [
 		],

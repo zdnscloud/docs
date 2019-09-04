@@ -1,8 +1,6 @@
----
 title: "快速入门"
 metaTitle: "快速入门"
 metaDescription: "快速入门"
----
 
 ## 快速入门
 
@@ -28,7 +26,7 @@ metaDescription: "快速入门"
 
 ![img](create-statefulset.png)
 
-创建页面按如下内容进行填写
+**创建页面按如下内容进行填写**
 
 名称：wordpress-mysql
 
@@ -38,19 +36,19 @@ metaDescription: "快速入门"
 
 镜像：mysql:5.6
 
-在容器一节，单击环境变量
+**在容器一节，单击环境变量**
 
 键：MYSQL_ROOT_PASSWORD
 
 值：zcloud
 
-在容器一节，单击开放端口
+**在容器一节，单击开放端口**
 
 端口名称：mysql
 
 端口：3306
 
-在存储卷一节，单击添加存储：
+**在存储卷一节，单击添加存储：**
 
 模版名称：mysql-storage
 
@@ -58,7 +56,7 @@ metaDescription: "快速入门"
 
 存储类型：lvm
 
-在容器一节，单击添加存储卷：
+**在容器一节，单击添加存储卷：**
 
 存储卷类型：存储卷
 
@@ -87,7 +85,7 @@ metaDescription: "快速入门"
 
 ![img](create-deployment.png)
 
-创建页面按如下内容进行填写
+**创建页面按如下内容进行填写**
 
 名称：wordpress
 
@@ -97,7 +95,7 @@ metaDescription: "快速入门"
 
 镜像：wordpress:4.8-apache
 
-在容器一节，单击环境变量两次
+**在容器一节，单击环境变量两次**
 
 键：WORDPRESS_DB_HOST
 
@@ -107,13 +105,13 @@ metaDescription: "快速入门"
 
 值：zcloud
 
-在容器一节，单击开放端口
+**在容器一节，单击开放端口**
 
 端口名称：http
 
 端口：80
 
-在存储卷一节，单击添加存储：
+**在存储卷一节，单击添加存储：**
 
 模版名称：wordpress-storage
 
@@ -121,7 +119,7 @@ metaDescription: "快速入门"
 
 存储类型：lvm
 
-在容器一节，单击添加存储卷：
+**在容器一节，单击添加存储卷：**
 
 存储卷类型：存储卷
 
@@ -137,13 +135,27 @@ metaDescription: "快速入门"
 
 在弹出的对话框中选择确定，进入Mysql服务的创建页面。
 
-服务类型选择Node Port，单击内部端口打开按钮，端口列表填写8888，保存即可。在弹出的提示框中选择取消。
+单击内部端口打开按钮，保存即可。在弹出的提示框中“服务已创建成功，是否创建关联访问入口？”选择确定。
 
 ![img](wordpress-svc-save.png)
 
+4、部署wordpress ingress
+
+名称：wordpress
+
+域名：192.168.218.130.zc.zdns.cn
+
+路径：/
+
+其中域名的规则为边界节点IP.zc.zdns.cn。
+
+添加访问入口路径，如下图：
+
+![img](wordpress-ing-save.png)
+
 ## 访问wordpress
 
-浏览器地址栏输入：http://<work节点IP>:<nodeport>，如下图所示：
+浏览器地址栏输入：http://192.168.218.130.zc.zdns.cn，如下图所示：
 
 ![img](wordpress1.png)
 
