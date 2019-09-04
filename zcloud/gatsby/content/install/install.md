@@ -207,7 +207,7 @@ deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security universe
 EOF
 ```
 
-* **Docker-ce****安装**
+* **Docker-ce安装**
 
 ```
 # 定义安装版本
@@ -238,7 +238,7 @@ Docker-Engine Docker官方已经不推荐使用，请安装Docker-CE。
 
 CentOS 7.x
 
-* **Docker-ce****安装**
+* **Docker-ce安装**
 
 因为CentOS的安全限制，通过Zcloud安装K8S集群时候无法使用`root`账户。所以，建议`CentOS`用户使用非`root`用户来运行docker。
 
