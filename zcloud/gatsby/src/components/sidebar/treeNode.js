@@ -34,7 +34,7 @@ const TreeNode = ({className = '', setCollapsed, collapsed, url, title, items, l
           {title}
         </Link>
       ) : (
-        <a onClick={collapse}>{title}</a>
+        level > 0 ? <a onClick={collapse}>{title}</a> : null
       )}
 
       {!isCollapsed && hasChildren ? (
