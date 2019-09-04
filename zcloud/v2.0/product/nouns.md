@@ -1,3 +1,9 @@
+---
+title: "名词解释" 
+metaTitle: "名词解释"
+metaDescription: "名词解释"
+---
+
 ## 名词解释
 
 了解和使用 Zcloud管理平台，会涉及到以下的基本概念：
