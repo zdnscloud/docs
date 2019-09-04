@@ -1,14 +1,14 @@
 const config = {
 	"gatsby": {
 		"pathPrefix": "/",
-		"siteUrl": "https://zc.zdns.cn",
+		"siteUrl": "http://z.zdns.cn",
 		"gaTrackingId": null
 	},
 	"header": {
 		"logo": "/logo.jpg",
-		"logoLink": "https://zc.zdns.cn",
+		"logoLink": "http://z.zdns.cn",
 		"title": "Zcloud 文档中心",
-		"githubUrl": "https://github.com/zdnscloud/docs",
+		"githubUrl": "",
 		"helpUrl": "",
 		"tweetText": "",
 		"links": [
@@ -33,11 +33,13 @@ const config = {
       ],
       [
         'install',
-        'install',
+        'base',
+        'zcloud',
       ],
       [
         'quickstart',
-        'quickstart',
+        'mysql',
+        'wordpress',
       ]
     ],
 		"links": [
