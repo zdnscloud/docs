@@ -6,6 +6,8 @@ metaDescription: "案例一：部署DNS-vanguard"
 
 ## 部署DNS-vanguard
 
+## 创建vanguard配置
+
 1、选择集群
 
 ![img](entry-cluster.png)
@@ -29,6 +31,7 @@ metaDescription: "案例一：部署DNS-vanguard"
 单击文件编辑后，粘贴以下内容并保存：
 
 ```
+data：
 server:
     addr: 
     - 0.0.0.0:53
@@ -76,7 +79,9 @@ resolver:
 
 ![img](vanguard-deployment.png)
 
-3、创建翻无状态副本
+## 部署vanguard
+
+1、创建翻无状态副本
 
 ![img](create-deployment.png)
 
@@ -124,7 +129,7 @@ resolver:
 
 ![img](vanguard-save2.png)
 
-4、部署vanguard svc
+2、部署vanguard svc
 
 在弹出的对话框中选择确定，进入vanguard服务的创建页面。
 
@@ -132,7 +137,7 @@ resolver:
 
 ![img](vanguard-svc.png)
 
-5、部署vanguard的UDP服务入口
+3、部署vanguard的UDP服务入口
 
 在上一布弹出的“服务已创建成功，是否创建关联访问入口？”单击确定按钮，进入UDP服务入口创建页面。
 
@@ -142,10 +147,6 @@ resolver:
 
 在任意到集群边界节点能通的机器上执行：
 
-```
-dig @192.168.218.130.zc.zdns.cn www.zdns.cn
-```
+```dig @192.168.218.130.zc.zdns.cn www.zdns.cn
 
 效果如下图：
-
-![img](dig.png)
