@@ -39,7 +39,7 @@ const config = {
         'quickstart',
         'vanguard',
         'wordpress',
-      ]，
+      ],
       'api'
     ],
 		"links": [
