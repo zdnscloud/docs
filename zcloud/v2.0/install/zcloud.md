@@ -16,7 +16,7 @@ metaDescription: "部署Zcloud"
           -db /etc/db 
   ```
 
-  注意：-db /etc/db参数为zcloud的k-v数据库存储目录。至此，Zcloud部署完成。
+  注意：-db /etc/db参数为zcloud的k-v数据库存储目录。
   
 
 ## 登录Zcloud
