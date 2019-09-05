@@ -29,7 +29,6 @@ const config = {
         'introduction',
         'nouns',
         'functions',
-        'scenarios',
       ],
       [
         'install',
