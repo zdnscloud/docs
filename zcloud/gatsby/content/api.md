@@ -7,7 +7,7 @@ metaDescription: "API文档"
 * APIVersion: api版本，包含Group和Version两个字段，代表api的使用群组和版本信息
 
 * Resource: 由api操作的基础资源对象，每个基础资源对象包含基本属性和每个资源特有属性，基础属性包含id，资源类型type，资源链接links，创建时间creationTimestamp
-  * Collection为一种类型的Resource集合，根据Resource名字自动生成，规则与英文单词复数一致
+  * Collection为相同类型Resource集合，Collection名字根据Resource名字自动生成，规则与英文单词复数一致
   	 * 如果Resource名字以字母s、ch、x结尾，加es
   	 * 如果Resource名字以字母y结尾，且y前面那个字母不是［aeiou］，将y变成i加es
   	 * 其他直接加s
@@ -17,7 +17,7 @@ metaDescription: "API文档"
     * namespace子资源:  application  chart  configmap  cronjob deployment daemonset ingress innerservice  job limitrange  outservice  persistentvolumeclaim  resourcequota  secret  service  statefulset udpingress
     * deployment/daemonset/satefulset子资源: pod
 	
-* Collection: 也是由api可以操作的一种资源，代表一组相同类型的Resource，其中Collection的type为collection，字段resourceType为Data资源数组的资源类型，data为Resource资源对象数组
+* Collection: 代表一组相同类型的Resource，当用户获取一种类型的所有Resource时，就会返回Collection，其中Collection的type为collection，字段resourceType为Data资源数组的资源类型，data为Resource资源对象数组
 
 * Action: 对资源的一种操作，使用POST方式，但是又不是像POST添加资源的操作，例如Login这种特殊的操作，其中字段name为Action名字，input为Action的参数，output为Action返回的结果
 
@@ -26,7 +26,7 @@ metaDescription: "API文档"
 		curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 
 # URL
-  * 资源URL由groupPrefix、apiversion和资源父子关系组成, 目前支持的groupPrefix只有/apis， apiversion包含group和version两个字段，group目前只支持zcloud.cn，version为v1
+  * 资源URL由groupPrefix、APIVersion和资源父子关系组成, 目前支持的groupPrefix只有/apis， APIVersion包含group和version两个字段，group目前只支持zcloud.cn，version为v1
   * 如果资源是顶级资源，没有父资源，如cluster，自动生成URL为 /apis/zcloud.cn/v1/clusters
   * 如果资源只有一个父资源，如namespace父资源为cluster，那么自动生成URL为 /apis/zcloud.cn/v1/clusters/cluster_id/namespaces
   * 如果资源有多个父资源，那么会自动生成多个URL， 如pod父资源有deployment、daemonset、statefulset，自动生成的URL为
