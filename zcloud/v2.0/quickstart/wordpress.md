@@ -4,8 +4,6 @@ metaTitle: "案例二：部署Wordpress"
 metaDescription: "案例二：部署Wordpress"
 ---
 
-## 快速入门
-
 本教程将指导您完成:
 
 - 部署一个数据库，Mysql；
