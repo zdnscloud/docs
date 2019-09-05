@@ -12,10 +12,11 @@ metaDescription: "部署Zcloud"
   docker rm -f zcloud 
   docker run --restart=always  -d -p 80:80 --name zcloud \
           -v /data/zcloud:/etc/db \
+          -v /data/zcloud/charts:/etc/chart \
           zdnscloud/zcloud:master \
-          -db /etc/db 
-  ```
-
+          -db /etc/db -chart /etc/chart 
+```
+  
   注意：-db /etc/db参数为zcloud的k-v数据库存储目录。
   
 
@@ -111,6 +112,17 @@ The operation has completed successfully.
 存储创建成功如图所示：
 
 ![img](storage.png)
+
+## 配置应用商
+
+应用商店在v2.0版本需要单独下载，在一台Zcloud的web server服务器执行命令如下：
+
+```
+git clone https://github.com/cloud-chart/helm-chart.git
+mv helm-chart /data/zcloud/charts
+```
+
+应用商店配置完成。
 
 至此，使用Zcloud安装一个集群的基础环境已经完毕。
 
