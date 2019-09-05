@@ -38,7 +38,7 @@ const config = {
       ],
       [
         'quickstart',
-        'mysql',
+        'vanguard',
         'wordpress',
       ]
     ],
