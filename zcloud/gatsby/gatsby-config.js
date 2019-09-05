@@ -19,6 +19,8 @@ const plugins = [
           resolve: "gatsby-remark-images",
           options: {
             maxWidth: 1035,
+            linkImagesToOriginal: true,
+            quality: 100,
             // sizeByPixelDensity: true
           }
         },
