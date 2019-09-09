@@ -114,6 +114,7 @@ const SidebarLayout = ({location}) => (
           <Header />
           <ul className={'sideBarUL'}>
             <Tree
+              location={location}
               edges={allMdx.edges}
             />
           </ul>

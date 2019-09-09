@@ -90,7 +90,7 @@ const calculateTreeData = edges => {
 }
 
 
-const Tree = ({edges}) => {
+const Tree = ({edges, location}) => {
   const [treeData] = useState(() => {
     return calculateTreeData(edges);
   });
@@ -103,6 +103,7 @@ const Tree = ({edges}) => {
   }
   return (
     <TreeNode
+      location={location}
       className={`${config.sidebar.frontLine ? 'showFrontLine' : 'hideFrontLine'} firstLevel`}
       setCollapsed={toggle}
       collapsed={collapsed}
