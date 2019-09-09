@@ -10,7 +10,7 @@ const TreeNode = ({className = '', setCollapsed, collapsed, url, title, items, l
     setCollapsed(url);
   }
   const hasChildren = items.length !== 0;
-  const pathname = location.pathname.replace(/\/$/, '');
+  const pathname = location && location.pathname.replace(/\/$/, '');
   const active = pathname === url || pathname === (config.gatsby.pathPrefix + url);
   const calculatedClassName = `${className} item ${active ? 'active' : ''}`;
   const childrenLevel = level + 1;
