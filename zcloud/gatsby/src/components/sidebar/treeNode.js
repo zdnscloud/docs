@@ -40,6 +40,7 @@ const TreeNode = ({className = '', setCollapsed, collapsed, url, title, items, l
         <ul data-level={childrenLevel}>
           {items.map((item, idx) => (
             <TreeNode
+              location={location}
               key={item.url || idx}
               setCollapsed={setCollapsed}
               collapsed={collapsed}
