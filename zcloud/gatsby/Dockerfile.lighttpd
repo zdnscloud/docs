@@ -1,0 +1,23 @@
+FROM node:buster as site
+
+# Create app directory
+WORKDIR /app
+
+# Install app dependencies
+RUN npm -g install gatsby-cli
+
+COPY package.json yarn yarn.lock ./
+
+RUN ./yarn
+
+# Bundle app source
+COPY . .
+
+# Build static files
+RUN ./yarn run build
+
+FROM gsmlg/lighttpd
+
+COPY --from=site /app/public /var/www/localhost
+
+ENTRYPOINT ["start.sh"]
