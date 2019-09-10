@@ -8,17 +8,17 @@ metaDescription: "部署Zcloud"
 * 部署Zcloud
   创建/data/zcloud目录，执行下面的命令：
 
-  ```
-  docker rm -f zcloud 
+```
+  docker rm -f zcloud
   docker run --restart=always  -d -p 80:80 --name zcloud \
           -v /data/zcloud:/etc/db \
           -v /data/zcloud/charts:/etc/chart \
           zdnscloud/zcloud:master \
-          -db /etc/db -chart /etc/chart 
+          -db /etc/db -chart /etc/chart
 ```
-  
+
   注意：-db /etc/db参数为zcloud的k-v数据库存储目录。
-  
+
 
 ## 登录Zcloud
 
@@ -125,4 +125,3 @@ mv helm-chart /data/zcloud/charts
 应用商店配置完成。
 
 至此，使用Zcloud安装一个集群的基础环境已经完毕。
-
