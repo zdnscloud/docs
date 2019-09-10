@@ -8,7 +8,6 @@ docker: build-image
 
 build-image:
 	docker build -t zdnscloud/docs -f Dockerfile.lighttpd .
-	docker image prune -f
 
 .PHONY: clean install
 
