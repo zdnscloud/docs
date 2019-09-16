@@ -447,7 +447,7 @@ creating，updating，connecting状态可进行取消操作。
 
 Storageclass名称与存储集群名称一致。用户选择当前集群可用的带有存储的节点加入到存储集中。对于可用的定义如下：节点有块设备，块设备没有文件系统，块设备没有被zcloud存储使用，块设备为空设备，满足以上所有条件，该节点才是可用的。
 
-目前需要支持本地存储（lvm），网络存储（ceph），创建是指定类型。
+目前需要支持本地存储（lvm），网络存储（ceph），创建时指定类型。
 
 **删除**
 
@@ -462,6 +462,10 @@ Storageclass名称与存储集群名称一致。用户选择当前集群可用�
 **编辑**
 
 编辑存储时，可以删除也可以增加。删除节点如果是ceph，时间会比较长。需要展示存储集的相应状态。
+
+**状态**
+
+对于存储资源，状态变动的有两种情况：创建、更新。某一个块设备异常只有事件，存储的状态不应该受影响。存储在创建时状态变化比较多，用文字显示。更新时存储集群显示更新即可，具体每一个块设备的状态待后续开发。
 
 #### **5.3.4.5**      网络
 
@@ -592,7 +596,9 @@ chart资源没有父资源，也没有子资源。chart本身是独立的。
 
 ​		svc，ingress，与deployment等关系不做保存。
 
-**app资源的子资源状态**在app资源列表中，需要显示workload（deployment,statefulset,daemonset）的总数与ready数。例如一个app资源包含一个deployment，2个statefulset，那么app资源显示的子资源总数为3，当一个workload状态变成ready后，app子资源的ready数加1。
+**app资源的子资源状态**
+
+在app资源列表中，需要显示workload（deployment,statefulset,daemonset）的总数与ready数。例如一个app资源包含一个deployment，2个statefulset，那么app资源显示的子资源总数为3，当一个workload状态变成ready后，app子资源的ready数加1。
 
 **删除**
 
