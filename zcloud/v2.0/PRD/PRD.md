@@ -592,7 +592,7 @@ chart资源没有父资源，也没有子资源。chart本身是独立的。
 
 ​		svc，ingress，与deployment等关系不做保存。
 
-​		同时，在app资源列表中，需要显示workload（deployment,statefulset,daemonset）的总数与ready数。例如一个app资源包含一个deployment，2个statefulset，那么app资源显示的子资源总数为3，当一个workload状态变成ready后，app子资源的ready数加1。
+**app资源的子资源状态**在app资源列表中，需要显示workload（deployment,statefulset,daemonset）的总数与ready数。例如一个app资源包含一个deployment，2个statefulset，那么app资源显示的子资源总数为3，当一个workload状态变成ready后，app子资源的ready数加1。
 
 **删除**
 
@@ -675,15 +675,51 @@ chart资源没有父资源，也没有子资源。chart本身是独立的。
 
 #### **5.7.4.1**      无状态副本
 
-statefulset readyReplicas/replicas
+**列表页**
+
+显示deployment的概要信息，名称、子资源状态、副本数、创建时间
+
+子资源状态定义如下：deployment readyReplicas/replicas
+
+**详情页**
+
+展示创建时的输入，展示子资源的POD列表。
+
+**操作**
+
+升级、回滚、删除。
 
 #### **5.7.4.2**      有状态副本
 
-statefulset readyReplicas/replicas
+**列表页**
+
+显示statefulset的概要信息，名称、子资源状态、副本数、创建时间
+
+子资源状态定义如下：statefulset readyReplicas/replicas
+
+**详情页**
+
+展示创建时的输入，展示子资源的POD列表。
+
+**操作**
+
+升级、回滚、删除。
 
 #### **5.7.4.3**      守护进程集
 
- daemonset numberReady/desiredNumberScheduled
+ **列表页**
+
+显示daemonset的概要信息，名称、子资源状态、副本数、创建时间
+
+子资源状态定义如下：daemonset numberReady/desiredNumberScheduled
+
+**详情页**
+
+展示创建时的输入，展示子资源的POD列表。
+
+**操作**
+
+升级、回滚、删除。
 
 #### **5.7.4.4**      定时任务
 
