@@ -278,7 +278,7 @@ SSH设置：用户名，ssh私钥文件，ssh连接端口。
 
 **使用角色：** 管理员。
 
-删除只是把zcloud的集群记录删除，k8s方面不做任何清理。
+删除zcloud的集群记录，zcloud记录的集群资源要关联删除。
 
 集群删除：在unreachable，running，unavailable状态下可以操作删除集群。
 
@@ -592,7 +592,7 @@ chart资源没有父资源，也没有子资源。chart本身是独立的。
 
 ​		svc，ingress，与deployment等关系不做保存。
 
-​        只有在fail状态下不允许进行祥情的查看，其它状态都可以查看祥情。
+​		同时，在app资源列表中，需要显示workload（deployment,statefulset,daemonset）的总数与ready数。例如一个app资源包含一个deployment，2个statefulset，那么app资源显示的子资源总数为3，当一个workload状态变成ready后，app子资源的ready数加1。
 
 **删除**
 
@@ -675,13 +675,15 @@ chart资源没有父资源，也没有子资源。chart本身是独立的。
 
 #### **5.7.4.1**      无状态副本
 
- 
+statefulset readyReplicas/replicas
 
 #### **5.7.4.2**      有状态副本
 
- 
+statefulset readyReplicas/replicas
 
 #### **5.7.4.3**      守护进程集
+
+ daemonset numberReady/desiredNumberScheduled
 
 #### **5.7.4.4**      定时任务
 
