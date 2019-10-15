@@ -3,7 +3,8 @@ title: "API文档"
 metaTitle: "API文档"
 metaDescription: "API文档"
 ---
-# Terminology
+# 术语
+
 * APIVersion: api版本，包含Group和Version两个字段，代表api的使用群组和版本信息
 
 * Resource: 由api操作的基础资源对象，每个基础资源对象包含基本属性和每个资源特有属性，基础属性包含id，资源类型type，资源链接links，创建时间creationTimestamp
@@ -36,7 +37,7 @@ metaDescription: "API文档"
   /apis/zcloud.cn/v1/clusters/cluster_id/namespaces/namespace_id/daemonsets/daemonset_id/pods 
   /apis/zcloud.cn/v1/clusters/cluster_id/namespaces/namespace_id/statefulsets/statefulset_id/pods
     
-# Operations
+# 操作
 
 * Create Operation: 创建一个Resource
   * Request: 
@@ -83,7 +84,7 @@ metaDescription: "API文档"
     * status code: 200 OK 或者其他错误code
     * body: 一个string
 
-# Status Code
+# 状态码
 api的应答会包含Http status code，请求成功会返回2xx，请求失败会返回4xx或5xx
 
 * 200 OK, 更新成功，Action操作成功，获取资源没有报错都返回200
@@ -98,7 +99,7 @@ api的应答会包含Http status code，请求成功会返回2xx，请求失败�
 * 500 InternalServerError，内部错误返回500
 * 503 ClusterUnavailable， 集群不可用时返回503
 
-# Links
+# 链接
   * 操作资源时response会有links字段返回，方便client快捷使用，如statefulset的id为sts123的资源links如下
 
 		{
@@ -118,7 +119,7 @@ api的应答会包含Http status code，请求成功会返回2xx，请求失败�
     * 如果资源支持更新操作，即资源schema的ResourceMethods中设置了PUT，links中就会包含update
     * 如果资源有子资源，如statefulset的是pod父资源，links中会包含pod的collection，即pods
 
-# Resources
+# 资源
 
 ## Application
 Collection name is applications, its parents is namespace
